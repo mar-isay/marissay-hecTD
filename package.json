@@ -1,0 +1,24 @@
+{
+  "name": "marissay-hectd",
+  "version": "1.0.0",
+  "description": "Tüm bölümlerdeki üniversite öğrencilerinin akademik hayatlarını kolaylaştırmayı hedefleyen, modern teknolojilerle geliştirilmiş bir mobil platformdur.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mar-isay/marissay-hecTD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mar-isay/marissay-hecTD/issues"
+  },
+  "homepage": "https://github.com/mar-isay/marissay-hecTD#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
