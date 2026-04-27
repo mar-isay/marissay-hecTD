@@ -1,23 +1,31 @@
+const express = require('express');
 const { Pool } = require('pg');
 require('dotenv').config();
 
-// Veritabanı bağlantı ayarları
+const app = express();
+const port = 3000;
+
+// Veritabanı Bağlantı Havuzu
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-async function ilkOgrenciyiEkle() {
-  try {
-    const sorgu = 'INSERT INTO users (ogrenci_no, sifre, isim_soyisim, bolum) VALUES ($1, $2, $3, $4) RETURNING *';
-    const degerler = ['2026001', 'sifre123', 'Senin Adın', 'Yazılım'];
-    
-    const sonuc = await pool.query(sorgu, degerler);
-    console.log('Başarıyla eklendi:', sonuc.rows[0]);
-  } catch (err) {
-    console.error('Hata oluştu:', err);
-  } finally {
-    pool.end();
-  }
-}
+// 1. Uç Nokta: Ana Sayfa
+app.get('/', (req, res) => {
+  res.send('HEC TD API Sunucusu Çalışıyor!');
+});
 
-ilkOgrenciyiEkle();
+// 2. Uç Nokta: Tüm Öğrencileri Getir (YENİ!)
+app.get('/ogrenciler', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM users');
+    res.json(result.rows); // Veritabanındaki tüm satırları JSON formatında gönderir
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Veritabanı hatası oluştu.');
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Sunucu http://localhost:${port} adresinde hazır!`);
+});
